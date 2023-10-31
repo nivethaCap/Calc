@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+
+<link href=style.css> 
+      
+ </head>
+  
+ <body>
+  
+<div class="box">
+
+<h1 class="h1">Age Calculator</h1> 
+ 
+<label for="date"></label>
+<input type=date name="birthDate"id="date" required>
+
+<input type="button" value="calculate" id="calculateBtn"> 
+
+<p id="result"></p> 
+</div>
+
+<script>
+ 
+let userInput = document.getElementById("date")
+
+userInput.max=new Date().toISOString().split("T")[0];
+
+let btn = document.getElementById("calculateBtn")
+
+let result = document.getElementById("result")
+
+
+btn.addEventListener("click",calculateAge)
+
+function calculateAge(){
+
+if(userInput.value === ""){
+ alert("Please Select Date")   
+}
+
+else{
+  getAge();  
+}
+
+}
+
+function getAge(){
+
+let birthDate = new Date(userInput.value) 
+
+let d1 = birthDate.getDate() 
+let m1 = birthDate.getMonth()
+let y1 = birthDate.getFullYear()
+
+let today =new Date()
+
+let d2 = today.getDate()
+let m2 = today.getMonth()
+let y2 = today.getFullYear()
+
+//year Difference
+
+let year = y2 - y1
+
+//Month Difference
+
+let month;
+if(m2 >= m1) {
+month = m2 - m1;    
+}
+
+else{
+year --;
+month = 12 + m2 - m1;    
+}
+
+//days Difference
+
+let date;
+if(d2 >= d1){
+date = d2 - d1 ;  
+}
+
+else{
+month --;
+d3 = daysInMonth(y1,m1) 
+
+date = d3 + d2 - d1;  
+}
+
+//case when month goes negative
+
+if(month<0){
+month = 11;   
+year--;
+}
+
+function daysInMonth(year,month){
+return new Date(year,month,0).getDate();  
+    
+}
+
+result.innerHTML=
+`You are ${year} Year 
+ ${month} month <br>
+ ${date} days Old`
+    
+}
+
+    
+</script> 
+ </body>
+</html>
